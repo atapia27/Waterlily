@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id String @id @default(uuid())
+  name String @unique
+  responses Response[]
+}
+
+model Response{
+  id String @id @default(uuid())
+  answer String 
+
+  userId String
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  surveyQuestionId String 
+  surveyQuestion SurveyQuestion @relation(fields: [surveyQuestionId], references: [id], onDelete: Cascade)
+  
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, surveyQuestionId])
+}
+
+enum QuestionType {
+  TEXT
+  NUMERIC
+}
+
+model Question {
+  id String @id @default(uuid())
+  title String
+  description String
+  questionType QuestionType
+  surveyQuestions SurveyQuestion[]
+
+  @@unique([title,description])
+}
+
+model Survey {
+  id String @id @default(uuid())
+  title String @unique
+  surveyQuestions SurveyQuestion[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SurveyQuestion{
+  id String @id @default(uuid())
+  surveyId String
+  survey Survey @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  questionId String
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  responses Response[]
+  @@unique([surveyId,questionId])
+
+}
