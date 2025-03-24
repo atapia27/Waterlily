@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-import prisma from "../../db";
+import prisma from "../db";
 
 export const submitSurveyResponses = async (req: Request, res: Response) => {
     const { userId, responses} = req.body

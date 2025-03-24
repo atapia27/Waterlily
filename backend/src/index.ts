@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from "cors"
-import surveyRoutes from "./src/routes/surveyRoutes"
+import surveyRoutes from "./routes/surveyRoutes"
 
 const app = express()
 
