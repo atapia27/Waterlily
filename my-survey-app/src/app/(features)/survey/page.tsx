@@ -14,10 +14,11 @@ const SurveyListPage = () => {
   }, []); // ✅ runs only once
 
   return (
-    <div className="mx-auto max-w-2xl p-6">
-      <h1 className="mb-4 text-2xl font-bold">Available Surveys:</h1>
-      <SurveyList surveys={allSurveys} />
-    </div>
+<div className="flex items-center justify-start flex-col min-h-screen bg-white p-12 ">
+  <h1 className="mb-4 text-2xl font-bold text-black">Available Surveys:</h1>
+  <SurveyList surveys={allSurveys} />
+</div>
+
   );
 };
 

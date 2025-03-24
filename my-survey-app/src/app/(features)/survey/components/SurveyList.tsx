@@ -11,9 +11,9 @@ const SurveyList = ({ surveys }: SurveyListProps) => {
   }
 
   return (
-    <ul className="space-y-3">
+    <ul className="space-y-3 ">
       {surveys.map((survey) => (
-        <li key={survey.id}>
+        <li key={survey.id} className="text-gray-800 hover:text-blue-800">
           <Link href={`/survey/${survey.id}`}>{survey.title}</Link>
         </li>
       ))}

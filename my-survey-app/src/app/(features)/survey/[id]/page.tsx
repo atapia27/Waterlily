@@ -25,17 +25,23 @@ const SurveyPage = () => {
   const handleReview = () => {
     router.push(`/survey/${surveyId}/review`);
   };
-
   return (
-    <div className="mx-auto max-w-2xl p-6">
-      <h1 className="text-2xl font-bold mb-4">{survey.title}</h1>
-      <SurveyForm />
-      <button
-        onClick={handleReview}
-        className="mt-6 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-      >
-        Review Answers
-      </button>
+    <div className="min-h-screen bg-gray-50 p-6">
+      <h1 className="text-2xl font-bold mb-6 text-center text-black">{survey.title}</h1>
+  
+      <div className="flex justify-center">
+        <div className="w-full max-w-2xl">
+          <SurveyForm />
+          <div className="flex justify-center">
+            <button
+              onClick={handleReview}
+              className="mt-6 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 cursor-pointer"
+            >
+              Review Answers
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

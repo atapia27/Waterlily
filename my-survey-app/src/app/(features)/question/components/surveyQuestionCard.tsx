@@ -11,10 +11,10 @@ const SurveyQuestionCard = ({ question }: Props) => {
   return (
     <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md">
       <div className="space-y-2">
-        <h2 className="text-lg font-semibold text-red-800">
+        <h2 className="text-lg font-semibold text-gray-800">
           {question.question.title}
         </h2>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-600">
           {question.question.description}
         </p>
       </div>

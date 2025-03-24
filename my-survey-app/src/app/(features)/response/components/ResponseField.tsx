@@ -20,7 +20,7 @@ const ResponseField = ({ surveyQuestionId, type }: Props) => {
       type={type === 'NUMERIC' ? 'number' : 'text'}
       value={responses[surveyQuestionId] || ''}
       onChange={handleChange}
-      className="w-full mt-1 p-2 border rounded"
+      className="w-full mt-1 p-2 border rounded text-gray-600"
       placeholder={type === 'NUMERIC' ? 'Enter a number' : 'Enter your answer'}
     />
   );
