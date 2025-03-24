@@ -14,6 +14,7 @@ const ResponseField = ({ surveyQuestionId, type }: Props) => {
     updateResponse(surveyQuestionId, e.target.value);
   };
 
+  // if Numeric? then value (number input field)
   return (
     <input
       type={type === 'NUMERIC' ? 'number' : 'text'}
