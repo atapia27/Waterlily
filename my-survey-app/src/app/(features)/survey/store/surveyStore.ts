@@ -1,10 +1,8 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { getSurvey, getAllSurveys } from '../api/surveyApi';
-import { submitSurveyResponses } from '../../response/api/responseAPI';
-import { Survey, SurveyQuestion } from '@/types';
-
-
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { getSurvey, getAllSurveys } from "../api/surveyAPI";
+import { submitSurveyResponses } from "../../response/api/responseAPI";
+import { Survey, SurveyQuestion } from "@/types";
 
 type SurveyStore = {
   survey: Survey | null;
@@ -28,7 +26,7 @@ export const useSurveyStore = create<SurveyStore>()(
 
       setSurvey: async (surveyId: string) => {
         const data = await getSurvey(surveyId);
-        console.log("Fetched survey", data)
+        console.log("Fetched survey", data);
 
         set({
           survey: {
@@ -44,7 +42,7 @@ export const useSurveyStore = create<SurveyStore>()(
 
       fetchAllSurveys: async () => {
         const allSurveys = await getAllSurveys();
-        console.log("fetched all surveys:, ", allSurveys)
+        console.log("fetched all surveys:, ", allSurveys);
         set({ allSurveys });
       },
       // using the input field, we should get the information for our responses
@@ -58,32 +56,30 @@ export const useSurveyStore = create<SurveyStore>()(
         }));
       },
 
-
       submitResponses: async (surveyId, userId) => {
         const { responses } = get();
         const payload = Object.entries(responses).map(
-            ([surveyQuestionId, answer]) => ({
-          surveyQuestionId,
-          answer,
-        }));
+          ([surveyQuestionId, answer]) => ({
+            surveyQuestionId,
+            answer,
+          }),
+        );
 
-        if (payload.length ===0 ){
-            console.warn("No responses to")
-            return
+        if (payload.length === 0) {
+          console.warn("No responses to");
+          return;
         }
 
         try {
-           const res = await submitSurveyResponses(surveyId, userId, payload);
-            console.log(res)
+          const res = await submitSurveyResponses(surveyId, userId, payload);
+          console.log(res);
+        } catch (error) {
+          console.error(error);
         }
-        catch(error) {
-            console.error(error)
-        }
-
       },
     }),
     {
-      name: 'survey-store',
-    }
-  )
+      name: "survey-store",
+    },
+  ),
 );
